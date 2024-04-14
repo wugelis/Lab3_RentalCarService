@@ -8,6 +8,7 @@ using EasyArchitect.OutsideManaged.AuthExtensions.Services;
 using EasyArchitectCore.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json.Serialization;
 
 namespace Web.RentalCar.Controllers
 {
@@ -85,11 +86,10 @@ namespace Web.RentalCar.Controllers
         [APIName("CalculateRentalCost")]
         [ApiLogException]
         [ApiLogonInfo]
-        public async Task<decimal> CalculateRentalCostAsync(int daysRented, VehicleType vehicleType)
+        public async Task<decimal> CalculateRentalCostAsync(RentalCarRequest rentalCarRequest)
         {
-            return await Task.FromResult(_rentalCarServices.CalculateRentalCost(daysRented, vehicleType));
+            return await Task.FromResult(_rentalCarServices.CalculateRentalCost(rentalCarRequest.daysRented, rentalCarRequest.vehicleType));
         }
-
         /// <summary>
         /// 取得 Current Identity Id
         /// </summary>
